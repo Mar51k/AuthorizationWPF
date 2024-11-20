@@ -9,6 +9,6 @@
       Title="Client" Background="White">
 
     <Grid>
-        
+        <TextBlock Name="TextBlock_"  Text="Вы вошли как гость!" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

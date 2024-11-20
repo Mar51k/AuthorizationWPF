@@ -1,0 +1,813 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="active_additional">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="additional_id" Type="int" Nullable="false" />
+          <Property Name="additional_id2" Type="int" />
+          <Property Name="additional_id3" Type="int" />
+        </EntityType>
+        <EntityType Name="additional_list">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authtorizations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="payment_type" Type="int" Nullable="false" />
+          <Property Name="paid" Type="bit" Nullable="false" />
+          <Property Name="bank" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer" Type="int" Nullable="false" />
+          <Property Name="additional_services" Type="bit" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="permissions" Type="bit" Nullable="false" />
+          <Property Name="notes" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="orders_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="completed" Type="bit" Nullable="false" />
+          <Property Name="canceled" Type="bit" Nullable="false" />
+          <Property Name="paused" Type="bit" Nullable="false" />
+          <Property Name="paid" Type="bit" Nullable="false" />
+          <Property Name="reason" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="payment_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="receipts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="sum" Type="bigint" />
+          <Property Name="note" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronimyc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="int" Nullable="false" />
+          <Property Name="passport_num" Type="int" Nullable="false" />
+          <Property Name="inn_num" Type="int" Nullable="false" />
+          <Property Name="at_site" Type="bit" Nullable="false" />
+          <Property Name="account" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthsday" Type="date" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronimyc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_active_additional_additional_list">
+          <End Role="additional_list" Type="Self.additional_list" Multiplicity="1" />
+          <End Role="active_additional" Type="Self.active_additional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="additional_list">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="active_additional">
+              <PropertyRef Name="additional_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_active_additional_additional_list1">
+          <End Role="additional_list" Type="Self.additional_list" Multiplicity="0..1" />
+          <End Role="active_additional" Type="Self.active_additional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="additional_list">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="active_additional">
+              <PropertyRef Name="additional_id2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_active_additional_additional_list2">
+          <End Role="additional_list" Type="Self.additional_list" Multiplicity="0..1" />
+          <End Role="active_additional" Type="Self.active_additional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="additional_list">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="active_additional">
+              <PropertyRef Name="additional_id3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_active_additional_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="active_additional" Type="Self.active_additional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="active_additional">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authtorizations_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Authtorizations" Type="Self.Authtorizations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Authtorizations">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_payments_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="order_payments" Type="Self.order_payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_payments">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_payments_payment_types">
+          <End Role="payment_types" Type="Self.payment_types" Multiplicity="1" />
+          <End Role="order_payments" Type="Self.order_payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="payment_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_payments">
+              <PropertyRef Name="payment_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_history_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="orders_history" Type="Self.orders_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders_history">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_receipts_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="receipts" Type="Self.receipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="receipts">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staff_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="active_additional" EntityType="Self.active_additional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="additional_list" EntityType="Self.additional_list" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authtorizations" EntityType="Self.Authtorizations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_payments" EntityType="Self.order_payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders_history" EntityType="Self.orders_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment_types" EntityType="Self.payment_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="receipts" EntityType="Self.receipts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_active_additional_additional_list" Association="Self.FK_active_additional_additional_list">
+            <End Role="additional_list" EntitySet="additional_list" />
+            <End Role="active_additional" EntitySet="active_additional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_active_additional_additional_list1" Association="Self.FK_active_additional_additional_list1">
+            <End Role="additional_list" EntitySet="additional_list" />
+            <End Role="active_additional" EntitySet="active_additional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_active_additional_additional_list2" Association="Self.FK_active_additional_additional_list2">
+            <End Role="additional_list" EntitySet="additional_list" />
+            <End Role="active_additional" EntitySet="active_additional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_active_additional_orders" Association="Self.FK_active_additional_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="active_additional" EntitySet="active_additional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authtorizations_Users" Association="Self.FK_Authtorizations_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Authtorizations" EntitySet="Authtorizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_payments_orders" Association="Self.FK_order_payments_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_payments" EntitySet="order_payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_payments_payment_types" Association="Self.FK_order_payments_payment_types">
+            <End Role="payment_types" EntitySet="payment_types" />
+            <End Role="order_payments" EntitySet="order_payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_history_orders" Association="Self.FK_orders_history_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orders_history" EntitySet="orders_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_Users" Association="Self.FK_orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_receipts_orders" Association="Self.FK_receipts_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="receipts" EntitySet="receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staff_roles" Association="Self.FK_staff_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="active_additional">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="additional_id" Type="Int32" Nullable="false" />
+          <Property Name="additional_id2" Type="Int32" />
+          <Property Name="additional_id3" Type="Int32" />
+          <NavigationProperty Name="additional_list" Relationship="Self.FK_active_additional_additional_list" FromRole="active_additional" ToRole="additional_list" />
+          <NavigationProperty Name="additional_list1" Relationship="Self.FK_active_additional_additional_list1" FromRole="active_additional" ToRole="additional_list" />
+          <NavigationProperty Name="additional_list2" Relationship="Self.FK_active_additional_additional_list2" FromRole="active_additional" ToRole="additional_list" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_active_additional_orders" FromRole="active_additional" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="additional_list">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="active_additional" Relationship="Self.FK_active_additional_additional_list" FromRole="additional_list" ToRole="active_additional" />
+          <NavigationProperty Name="active_additional1" Relationship="Self.FK_active_additional_additional_list1" FromRole="additional_list" ToRole="active_additional" />
+          <NavigationProperty Name="active_additional2" Relationship="Self.FK_active_additional_additional_list2" FromRole="additional_list" ToRole="active_additional" />
+        </EntityType>
+        <EntityType Name="Authtorizations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Authtorizations_Users" FromRole="Authtorizations" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="order_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_type" Type="Int32" Nullable="false" />
+          <Property Name="paid" Type="Boolean" Nullable="false" />
+          <Property Name="bank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_order_payments_orders" FromRole="order_payments" ToRole="orders" />
+          <NavigationProperty Name="payment_types" Relationship="Self.FK_order_payments_payment_types" FromRole="order_payments" ToRole="payment_types" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer" Type="Int32" Nullable="false" />
+          <Property Name="additional_services" Type="Boolean" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="permissions" Type="Boolean" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="active_additional" Relationship="Self.FK_active_additional_orders" FromRole="orders" ToRole="active_additional" />
+          <NavigationProperty Name="order_payments" Relationship="Self.FK_order_payments_orders" FromRole="orders" ToRole="order_payments" />
+          <NavigationProperty Name="orders_history" Relationship="Self.FK_orders_history_orders" FromRole="orders" ToRole="orders_history" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_orders_Users" FromRole="orders" ToRole="Users" />
+          <NavigationProperty Name="receipts" Relationship="Self.FK_receipts_orders" FromRole="orders" ToRole="receipts" />
+        </EntityType>
+        <EntityType Name="orders_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="completed" Type="Boolean" Nullable="false" />
+          <Property Name="canceled" Type="Boolean" Nullable="false" />
+          <Property Name="paused" Type="Boolean" Nullable="false" />
+          <Property Name="paid" Type="Boolean" Nullable="false" />
+          <Property Name="reason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_history_orders" FromRole="orders_history" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="payment_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="order_payments" Relationship="Self.FK_order_payments_payment_types" FromRole="payment_types" ToRole="order_payments" />
+        </EntityType>
+        <EntityType Name="receipts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="sum" Type="Int64" />
+          <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_receipts_orders" FromRole="receipts" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="staff" Relationship="Self.FK_staff_roles" FromRole="roles" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patronimyc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="Int32" Nullable="false" />
+          <Property Name="passport_num" Type="Int32" Nullable="false" />
+          <Property Name="inn_num" Type="Int32" Nullable="false" />
+          <Property Name="at_site" Type="Boolean" Nullable="false" />
+          <Property Name="account" Type="Int32" />
+          <NavigationProperty Name="roles" Relationship="Self.FK_staff_roles" FromRole="staff" ToRole="roles" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birthsday" Type="DateTime" Precision="0" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patronimyc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Authtorizations" Relationship="Self.FK_Authtorizations_Users" FromRole="Users" ToRole="Authtorizations" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_Users" FromRole="Users" ToRole="orders" />
+        </EntityType>
+        <Association Name="FK_active_additional_additional_list">
+          <End Role="additional_list" Type="Self.additional_list" Multiplicity="1" />
+          <End Role="active_additional" Type="Self.active_additional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="additional_list">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="active_additional">
+              <PropertyRef Name="additional_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_active_additional_additional_list1">
+          <End Role="additional_list" Type="Self.additional_list" Multiplicity="0..1" />
+          <End Role="active_additional" Type="Self.active_additional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="additional_list">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="active_additional">
+              <PropertyRef Name="additional_id2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_active_additional_additional_list2">
+          <End Role="additional_list" Type="Self.additional_list" Multiplicity="0..1" />
+          <End Role="active_additional" Type="Self.active_additional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="additional_list">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="active_additional">
+              <PropertyRef Name="additional_id3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_active_additional_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="active_additional" Type="Self.active_additional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="active_additional">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authtorizations_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Authtorizations" Type="Self.Authtorizations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Authtorizations">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_payments_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="order_payments" Type="Self.order_payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_payments">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_payments_payment_types">
+          <End Role="payment_types" Type="Self.payment_types" Multiplicity="1" />
+          <End Role="order_payments" Type="Self.order_payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="payment_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_payments">
+              <PropertyRef Name="payment_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_history_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="orders_history" Type="Self.orders_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders_history">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_receipts_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="receipts" Type="Self.receipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="receipts">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staff_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="construction_organizationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="active_additional" EntityType="Self.active_additional" />
+          <EntitySet Name="additional_list" EntityType="Self.additional_list" />
+          <EntitySet Name="Authtorizations" EntityType="Self.Authtorizations" />
+          <EntitySet Name="order_payments" EntityType="Self.order_payments" />
+          <EntitySet Name="orders" EntityType="Self.orders" />
+          <EntitySet Name="orders_history" EntityType="Self.orders_history" />
+          <EntitySet Name="payment_types" EntityType="Self.payment_types" />
+          <EntitySet Name="receipts" EntityType="Self.receipts" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="staff" EntityType="Self.staff" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_active_additional_additional_list" Association="Self.FK_active_additional_additional_list">
+            <End Role="additional_list" EntitySet="additional_list" />
+            <End Role="active_additional" EntitySet="active_additional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_active_additional_additional_list1" Association="Self.FK_active_additional_additional_list1">
+            <End Role="additional_list" EntitySet="additional_list" />
+            <End Role="active_additional" EntitySet="active_additional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_active_additional_additional_list2" Association="Self.FK_active_additional_additional_list2">
+            <End Role="additional_list" EntitySet="additional_list" />
+            <End Role="active_additional" EntitySet="active_additional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_active_additional_orders" Association="Self.FK_active_additional_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="active_additional" EntitySet="active_additional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authtorizations_Users" Association="Self.FK_Authtorizations_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Authtorizations" EntitySet="Authtorizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_payments_orders" Association="Self.FK_order_payments_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_payments" EntitySet="order_payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_payments_payment_types" Association="Self.FK_order_payments_payment_types">
+            <End Role="payment_types" EntitySet="payment_types" />
+            <End Role="order_payments" EntitySet="order_payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_history_orders" Association="Self.FK_orders_history_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orders_history" EntitySet="orders_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_Users" Association="Self.FK_orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_receipts_orders" Association="Self.FK_receipts_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="receipts" EntitySet="receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staff_roles" Association="Self.FK_staff_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="construction_organizationEntities">
+          <EntitySetMapping Name="active_additional">
+            <EntityTypeMapping TypeName="Model.active_additional">
+              <MappingFragment StoreEntitySet="active_additional">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="additional_id" ColumnName="additional_id" />
+                <ScalarProperty Name="additional_id2" ColumnName="additional_id2" />
+                <ScalarProperty Name="additional_id3" ColumnName="additional_id3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="additional_list">
+            <EntityTypeMapping TypeName="Model.additional_list">
+              <MappingFragment StoreEntitySet="additional_list">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authtorizations">
+            <EntityTypeMapping TypeName="Model.Authtorizations">
+              <MappingFragment StoreEntitySet="Authtorizations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_payments">
+            <EntityTypeMapping TypeName="Model.order_payments">
+              <MappingFragment StoreEntitySet="order_payments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="paid" ColumnName="paid" />
+                <ScalarProperty Name="bank" ColumnName="bank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="Model.orders">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="customer" ColumnName="customer" />
+                <ScalarProperty Name="additional_services" ColumnName="additional_services" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="permissions" ColumnName="permissions" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders_history">
+            <EntityTypeMapping TypeName="Model.orders_history">
+              <MappingFragment StoreEntitySet="orders_history">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="completed" ColumnName="completed" />
+                <ScalarProperty Name="canceled" ColumnName="canceled" />
+                <ScalarProperty Name="paused" ColumnName="paused" />
+                <ScalarProperty Name="paid" ColumnName="paid" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payment_types">
+            <EntityTypeMapping TypeName="Model.payment_types">
+              <MappingFragment StoreEntitySet="payment_types">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receipts">
+            <EntityTypeMapping TypeName="Model.receipts">
+              <MappingFragment StoreEntitySet="receipts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="Model.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff">
+            <EntityTypeMapping TypeName="Model.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronimyc" ColumnName="patronimyc" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="passport_num" ColumnName="passport_num" />
+                <ScalarProperty Name="inn_num" ColumnName="inn_num" />
+                <ScalarProperty Name="at_site" ColumnName="at_site" />
+                <ScalarProperty Name="account" ColumnName="account" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="birthsday" ColumnName="birthsday" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronimyc" ColumnName="patronimyc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

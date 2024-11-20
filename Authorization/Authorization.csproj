@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,9 +50,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +80,60 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\active_additional.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\additional_list.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Authtorizations.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\builder.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>builder.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\builder.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\builder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>builder.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\orders.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\orders_history.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\order_payments.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\payment_types.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\receipts.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\roles.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\staff.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>builder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\GenerateCapthcaText.cs" />
+    <Compile Include="Services\Hash.cs" />
+    <Compile Include="Services\Helper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +179,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\builder.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>builder.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+    <None Include="Models\builder.edmx.diagram">
+      <DependentUpon>builder.edmx</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,6 +200,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\builder.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>builder.Context.cs</LastGenOutput>
+      <DependentUpon>builder.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\builder.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>builder.edmx</DependentUpon>
+      <LastGenOutput>builder.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

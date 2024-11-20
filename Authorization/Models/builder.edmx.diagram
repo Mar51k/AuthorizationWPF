@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="44a57d991eeb4007b5e4843aac36dd1a" Name="Diagram1" ZoomLevel="79">
+        <EntityTypeShape EntityType="Model.active_additional" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.additional_list" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Authtorizations" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.order_payments" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.orders" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.orders_history" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.payment_types" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.receipts" Width="1.5" PointX="5.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.roles" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.staff" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Users" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_active_additional_additional_list" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_active_additional_additional_list1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_active_additional_additional_list2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_active_additional_orders" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Authtorizations_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_order_payments_orders" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_order_payments_payment_types" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_orders_history_orders" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_orders_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_receipts_orders" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_staff_roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -42,7 +42,7 @@ namespace Authorization
             {
                 btnBack.Visibility = Visibility.Hidden;
             }
-        }
+        }       
 
     }
 }
