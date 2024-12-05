@@ -12,9 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 using Authorization.Pages;
 using Authorization.Services;
 using Authorization.Models;
+using System.Windows.Threading;
 
 namespace Authorization.Pages
 {
@@ -24,11 +26,53 @@ namespace Authorization.Pages
     public partial class Authoriz : Page
     {
         int click;
+        int false_captcha_count = 0;
+        private DispatcherTimer timer;
+        private TimeSpan timeRemaining;
         public Authoriz()
         {
             InitializeComponent();
             click = 0;
         }
+
+
+
+        private void InitializeTimer()
+        {
+            timeRemaining = TimeSpan.FromSeconds(10);
+            timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if(timeRemaining > TimeSpan.Zero)
+            {
+                timeRemaining = timeRemaining.Subtract(TimeSpan.FromSeconds(1));
+                txtBlockTimer.Visibility = Visibility.Visible;
+                txtBlockTimer.Text = timeRemaining.ToString(@"mm\:ss");
+                loginbox.IsEnabled = false;
+                pwdbox.IsEnabled = false;
+                btnEnterGuests.IsEnabled = false;
+                btnEnter.IsEnabled = false;
+                txtboxCaptcha.IsEnabled = false;
+            }
+            else
+            {
+                txtBlockTimer.Visibility = Visibility.Hidden;
+                loginbox.IsEnabled = true;
+                pwdbox.IsEnabled = true;
+                btnEnterGuests.IsEnabled = true;
+                btnEnter.IsEnabled = true;
+                txtboxCaptcha.IsEnabled = true;
+            }
+        }
+
+
 
         private void btnEnterGuests_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +94,7 @@ namespace Authorization.Pages
             click += 1;
             string login = loginbox.Text.Trim();
             string password = pwdbox.Password.Trim();
-
+            
             construction_organizationEntities db = Helper.GetContext();
 
             var user = db.Authtorizations.Where(x => x.login == login && x.password == password).FirstOrDefault();
@@ -105,6 +149,13 @@ namespace Authorization.Pages
                 else
                 {
                     MessageBox.Show("Введите данные заново");
+                    false_captcha_count++;
+                    GenerateCapcha();
+                    if (false_captcha_count == 3)
+                    {
+                        InitializeTimer();
+                        false_captcha_count = 0;
+                    }
                 }
             }
         }
