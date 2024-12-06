@@ -9,6 +9,10 @@
       Title="Client" Background="White">
 
     <Grid>
-        <TextBlock Name="TextBlock_"  Text="Вы вошли как гость!" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Name="Time" Text="111" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Name="TextBlock_"  Text="Вы вошли как гость!" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </StackPanel>
+       
     </Grid>
 </Page>

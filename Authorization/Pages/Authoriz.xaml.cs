@@ -50,7 +50,7 @@ namespace Authorization.Pages
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if(timeRemaining > TimeSpan.Zero)
+            if (timeRemaining > TimeSpan.Zero)
             {
                 timeRemaining = timeRemaining.Subtract(TimeSpan.FromSeconds(1));
                 txtBlockTimer.Visibility = Visibility.Visible;
@@ -109,9 +109,25 @@ namespace Authorization.Pages
                     {
                         if (staff.role == role_.id)
                         {
-                            MessageBox.Show($"Вы вошли под: {role_.name}");
-                            LoadPage(role_.name.ToString(), user);
-                            click = 0;
+                            if (DateTime.Now.Hour >= 10 && DateTime.Now.Hour <= 18)
+                            {
+                                MessageBox.Show($"Вы вошли под: {role_.name}");
+                                LoadPage(role_.name.ToString(), user);
+                                click = 0;
+                            }
+                            else
+                            {
+                                if (DateTime.Now.Hour <= 10)
+                                {
+                                    MessageBox.Show("Смена ещё не началась!");
+                                    click = 0;
+                                }
+                                else if(DateTime.Now.Hour >= 19)
+                                {
+                                    MessageBox.Show("Смена уже закончилась!");
+                                    click = 0;
+                                }
+                            }
                         }
                     }
                     else
@@ -135,10 +151,25 @@ namespace Authorization.Pages
                     {
                         if (staff.role == role_.id)
                         {
-                            MessageBox.Show($"Вы вошли под: {role_.name}");
-                            LoadPage(role_.name.ToString(), user);
-                            click = 0;
-
+                            if (DateTime.Now.Hour >= 10 && DateTime.Now.Hour <= 18)
+                            {
+                                MessageBox.Show($"Вы вошли под: {role_.name}");
+                                LoadPage(role_.name.ToString(), user);
+                                click = 0;
+                            }
+                            else
+                            {
+                                if (DateTime.Now.Hour <= 10)
+                                {
+                                    MessageBox.Show("Смена ещё не началась!");
+                                    click = 0;
+                                }
+                                else if (DateTime.Now.Hour >= 19)
+                                {
+                                    MessageBox.Show("Смена уже закончилась!");
+                                    click = 0;
+                                }
+                            }
                         }
                     }
                     else
